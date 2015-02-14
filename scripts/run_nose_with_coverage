@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+if [ "$(basename $(pwd))" == "scripts" ]; then
+    pushd ..
+else
+    pushd .
+fi
+nosetests --with-coverage --cover-package financedatahoarder --cover-html --cover-html-dir=./cover .
+popd

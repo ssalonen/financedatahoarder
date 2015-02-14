@@ -1,0 +1,6 @@
+*.pyc
+.idea
+venv
+.gitignore
+cover
+.coverage

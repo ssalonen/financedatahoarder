@@ -1,0 +1,905 @@
+<html>
+<head>
+<script>
+function ts_to_date(ts, is_gmt)
+{
+    if (ts.length < 14) {
+        return ts;
+    }
+    
+    var datestr = (ts.substring(0, 4) + "-" + 
+                  ts.substring(4, 6) + "-" +
+                  ts.substring(6, 8) + "T" +
+                  ts.substring(8, 10) + ":" +
+                  ts.substring(10, 12) + ":" +
+                  ts.substring(12, 14) + "-00:00");
+    
+    var date = new Date(datestr);
+    if (is_gmt) {
+        return date.toGMTString();
+    } else {
+        return date.toLocaleString();
+    }
+}
+</script>
+</head>
+<body>
+  <h2>pywb Query Results</h2>
+    <b>108</b> captures of <b>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</b>
+  <table id="captures" style="border-spacing: 10px;">
+    <tr>
+      <th>Capture</th>
+      <th>Status</th>
+      <th>Original Url</th>
+      <th>Archive File</th>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307083453/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307083453", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307100004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307100004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307130003/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307130003", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307160004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307160004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307190005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307190005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150307220004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150307220004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150308010041/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308010041", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308040004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308040004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308100004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308100004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308160004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308160004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308190008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308190008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150308220008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150308220008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309010007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309010007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309040010/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309040010", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309100006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309100006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309130006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309130006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309160007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309160007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309190146/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309190146", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150309220005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150309220005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150310010123/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310010123", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310040005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310040005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310100005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310100005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310130008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310130008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310160005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310160005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310190005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310190005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150310220004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150310220004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150311010106/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311010106", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311040005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311040005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311100007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311100007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311160005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311160005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311190007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311190007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150311220004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150311220004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150312010059/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312010059", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312040006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312040006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312100004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312100004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312130005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312130005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312160003/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312160003", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312190004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312190004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150312220005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150312220005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150313010127/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313010127", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313040004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313040004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313100007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313100007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313160003/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313160003", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313190013/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313190013", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150313220005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150313220005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150314010058/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314010058", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314040006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314040006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314100005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314100005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314130009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314130009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314160004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314160004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314190005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314190005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150314220005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150314220005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150315010042/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315010042", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315040008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315040008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315100007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315100007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315160004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315160004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315190007/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315190007", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150315220005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150315220005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316010006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316010006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316040003/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316040003", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316100008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316100008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316130006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316130006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316160015/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316160015", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316190009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316190009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150316220008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150316220008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150317010116/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317010116", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317040005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317040005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317100005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317100005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317160005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317160005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317190004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317190004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150317220004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150317220004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150318010049/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318010049", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318040009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318040009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318100009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318100009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318130008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318130008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318160009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318160009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318190010/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318190010", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150318220008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150318220008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150319010054/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319010054", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319040009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319040009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319100006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319100006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319160008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319160008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319190009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319190009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150319220008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150319220008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150320010133/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320010133", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320040006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320040006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320100009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320100009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320130005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320130005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320160010/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320160010", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320190005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320190005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150320220008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150320220008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="">
+      <td><a href="http://host.com/replay/20150321010059/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321010059", true))</script>
+      </a></td>
+      <td>-</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321040005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321040005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321100009/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321100009", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321160004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321160004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321190008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321190008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150321220006/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150321220006", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150322010008/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150322010008", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150322040005/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150322040005", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150322100011/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150322100011", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+        <tr style="font-weight: bold">
+      <td><a href="http://host.com/replay/20150322130004/http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL">
+      <script>document.write(ts_to_date("20150322130004", true))</script>
+      </a></td>
+      <td>200</td>
+      <td>http://tools.morningstar.fi/fi/stockreport/default.aspx?SecurityToken=0P0000A5Z8%5D3%5D0%5DE0WWE%24%24ALL</td>
+      <td>rec-20150307083452833-00000-8-f82abbb46bae-9001.warc.gz.open</td>
+    </tr>
+      </table>
+  <p>
+  <i><b>* Unique captures are bold.</b> Other captures are duplicates of a previous capture.</i>
+  </p>
+  </body>
+</html>

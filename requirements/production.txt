@@ -1,0 +1,11 @@
+scrapy
+grequests
+numpy
+pandas
+flask
+flask-restplus
+nose
+nose-parameterized
+mock
+lockfile
+cachecontrol

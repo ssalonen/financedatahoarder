@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+if [ "$(basename $(pwd))" == "scripts" ]; then
+    pushd ..
+else
+    pushd .
+fi
+uwsgi --socket 127.0.0.1:8080 -w financedatahoarder.services.rest_server:app
+popd
