@@ -1,0 +1,6 @@
+Financedatahoarder is a python library for parsing morningstar.fi web page data on stock and other instrument prices.
+
+REST service is implemented to retrieve the data from a web service following CDX API / wayback machine url format (e.g. pywb_).
+
+
+.. _pywb: https://github.com/ikreymer/pywb
