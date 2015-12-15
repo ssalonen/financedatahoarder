@@ -99,7 +99,7 @@ class NonCachingAsyncRequestsClient(BaseClient):
                     logger.debug('(date={}, url={}) -> {}'.format(date, url, prepared_get.url))
                     prepared_requests[(date, url)] = prepared_get
         logger.debug('Mapping requests')
-        responses = grequests.imap(prepared_requests.values(), size=self.grequests_pool_size)
+        responses = grequests.map(prepared_requests.values(), size=self.grequests_pool_size)
         logger.debug('Mapping requests done')
         logger.debug('Parsing responses')
         key_stats = parse_overview_key_stats_from_responses(responses)

@@ -55,7 +55,7 @@ def _yield_test_query_key_stats_correct_http_requests_data():
 def test_query_key_stats_correct_http_requests(date_interval, urls, base_replay_url, grequests_pool_size,
                                                expected_requests):
     client = NonCachingAsyncRequestsClient(base_replay_url, grequests_pool_size)
-    with patch.object(data_access_api.grequests, 'imap') as grequests_imap, \
+    with patch.object(data_access_api.grequests, 'map') as grequests_map, \
             patch.object(client, '_cdx_list') as cdx_list:
         cdx_list.return_value = {
             url: pd.Series(['http://basehost.com/basepath/{}/{}'.format(date.strftime('%Y%m%d'), url)
@@ -68,8 +68,8 @@ def test_query_key_stats_correct_http_requests(date_interval, urls, base_replay_
 
         cdx_list.assert_called_once_with(urls)
 
-        eq_(len(grequests_imap.call_args_list), 1)
-        actual_args, actual_kwargs = grequests_imap.call_args_list[0]
+        eq_(len(grequests_map.call_args_list), 1)
+        actual_args, actual_kwargs = grequests_map.call_args_list[0]
         eq_(actual_kwargs, {'size': grequests_pool_size})
         eq_(len(actual_args), 1)
 
@@ -226,7 +226,7 @@ def _yield_test_query_key_stats_parsing_funds_http_200_data():
 def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_filenames, expected_key_stats):
     logger = logging.getLogger('test_query_key_stats_parsing_http_200')
     client = NonCachingAsyncRequestsClient('http://dummybaseurl.com', 4)
-    with patch.object(data_access_api.grequests, 'imap') as grequests_imap, \
+    with patch.object(data_access_api.grequests, 'map') as grequests_map, \
             patch.object(client, '_cdx_list'), \
             patch.object(data_access_api, 'prepare_replay_get'):
         responses = [pkg_resources.resource_stream(
@@ -235,7 +235,7 @@ def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_
         logger.debug(urls)
         num_requests = len(response_filenames)
         num_funds = len(urls)
-        grequests_imap.return_value = map(partial(DummyResponse, status_code=200), responses)
+        grequests_map.return_value = map(partial(DummyResponse, status_code=200), responses)
         # We should have num_requests should be evenly divisible by num_funds
         assert num_requests / float(num_funds) == int(num_requests / num_funds)
         num_times = int(num_requests / num_funds)
@@ -243,7 +243,7 @@ def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_
                                  urls)
 
         # Basic assertion that input test data is correct
-        actual_args, actual_kwargs = grequests_imap.call_args_list[0]
+        actual_args, actual_kwargs = grequests_map.call_args_list[0]
         eq_(actual_kwargs, {'size': 4})
         eq_(len(actual_args[0]), len(response_filenames))
 
