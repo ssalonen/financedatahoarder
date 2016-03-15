@@ -82,16 +82,18 @@ class SeligsonCSVKeyStatsResolver(object):
                 self.url, sep=';', names=['date', 'value'], dayfirst=True, parse_dates=['date'],
                 index_col='date')
         try:
+            data.index = data.index.tz_localize(dates.tz)
+        except TypeError: pass
+
+        try:
             data = data.loc[dates, 'value']
         except KeyError:
             return []
-        else:
-            try:
-                data.index = data.index.tz_localize(dates.tz)
-            except TypeError: pass
 
-            return [{} if pd.isnull(value) else OverviewKeyStats(value=value, value_date=value_date)
-                for value_date, value in data.iteritems()]
+        logger.debug("Parsed: {}".format(data))
+
+        return [{} if pd.isnull(value) else OverviewKeyStats(value=value, value_date=value_date)
+            for value_date, value in data.iteritems()]
 
 
 class DelegatingKeyStatsResolver(object):
