@@ -87,7 +87,9 @@ class SeligsonCSVKeyStatsResolver(object):
 
         try:
             data = data.loc[dates, 'value']
-        except KeyError:
+        except KeyError as e:
+            # No match at all
+            logger.error("Error: {}".format(e))
             return []
 
         logger.debug("Parsed: {}".format(data))
