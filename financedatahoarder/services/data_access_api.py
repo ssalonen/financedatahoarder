@@ -7,6 +7,7 @@ import grequests
 from financedatahoarder.services.http_utils import prepare_replay_get, prepare_cdx_list_get
 from financedatahoarder.services.parse_utils import parse_overview_key_stats_from_responses, parse_idx_list
 from financedatahoarder.services.utils import iter_sort_uniq
+from financedatahoarder.scraper.scrapers.parsers.morningstar_overview import OverviewKeyStats
 import pandas as pd
 import pytz
 import logging
@@ -16,6 +17,91 @@ class BaseClient(object):
 
     def query_key_stats(self, date_interval, urls):
         pass
+
+
+class PyWbIndexBasedKeyStatsResolver(object):
+
+    def __init__(self, url, cdx_list_func, prepare_replay_get_func, grequests_pool_size):
+        self.url = url
+        self._cdx_list = cdx_list_func
+        self._prepare_replay_get = prepare_replay_get_func
+        self._grequests_pool_size = grequests_pool_size
+
+    def parse(self, dates):
+        url = self.url
+        idx = self._cdx_list([url])
+        logger = logging.getLogger('PyWbIndexBasedParser')
+        prepared_requests = OrderedDict()
+        for date in dates:
+            #prepared_get = prepare_replay_get(date, base_replay_url, url)
+            try:
+                prepared_get = self._prepare_replay_get(date, idx[url])
+            except KeyError:
+                logger.warning('Could not find replay of {url} for {date}'.format(**locals()))
+            else:
+                logger.debug('(date={}, url={}) -> {}'.format(date, url, prepared_get.url))
+
+                prepared_requests[(date, url)] = prepared_get
+
+        logger.debug('Mapping requests')
+        responses = grequests.map(prepared_requests.values(), size=self._grequests_pool_size)
+        logger.debug('Mapping requests done')
+
+        logger.debug('Parsing responses')
+        key_stats = parse_overview_key_stats_from_responses(responses)
+        logger.debug('Parsing responses done')
+        return key_stats
+
+
+class SeligsonCSVKeyStatsResolver(object):
+    """
+    TODO: move to parsers?
+    https://github.com/nnarhinen/SeligsonRahastoarvot/blob/master/res/values/strings.xml
+    """
+
+    url_to_seligson_csv_url = {
+        'http://www.morningstar.fi/fi/funds/snapshot/snapshot.aspx?id=F0GBR04O2R': 'http://www.seligson.fi/graafit/global-brands.csv',
+        'http://www.morningstar.fi/fi/funds/snapshot/snapshot.aspx?id=F0GBR04UMF': 'http://www.seligson.fi/graafit/global-pharma.csv',
+        'http://www.morningstar.fi/fi/funds/snapshot/snapshot.aspx?id=F0GBR04O2J': 'http://www.seligson.fi/graafit/rahamarkkina.csv'
+    }
+
+    @staticmethod
+    def can_parse(cls, url):
+        return url in cls.url_to_seligson_csv_url
+
+    def __init__(self, url):
+        self.url = self.url_to_seligson_csv_url[url]
+        logger = logging.getLogger('SeligsonCSVKeyStatsResolver')
+        logger.debug('Resolved {} to {}'.format(url, self.url))
+
+    def parse(self, dates):
+        assert dates.tz is None  # naive dates
+        logger = logging.getLogger('SeligsonCSVKeyStatsResolver')
+        # FIXME: error handling
+        logger.debug('Querying {}'.format(self.url))
+        data = pd.read_csv(
+                self.url, sep=';', names=['date', 'value'], dayfirst=True, parse_dates=['date'],
+                index_col='date')
+        try:
+            data = data.loc[dates, 'value']
+        except KeyError:
+            return []
+        else:
+            assert data.index.tz is None  # naive dates
+            return [{} if pd.isnull(value) else OverviewKeyStats(value=value, value_date=value_date)
+                for value_date, value in data.iteritems()]
+
+
+class DelegatingKeyStatsResolver(object):
+
+    def __init__(self, url, cdx_list_func, prepare_replay_get_func, grequests_pool_size):
+        try:
+            self.parser = SeligsonCSVKeyStatsResolver(url)
+        except KeyError:
+            self.parser = PyWbIndexBasedKeyStatsResolver(url, cdx_list_func, prepare_replay_get_func, grequests_pool_size)
+
+    def parse(self, dates):
+        return self.parser.parse(dates)
 
 
 class NonCachingAsyncRequestsClient(BaseClient):
@@ -71,6 +157,9 @@ class NonCachingAsyncRequestsClient(BaseClient):
         idx = {url: idx for url, idx in zip(urls, idx)}
         return idx
 
+    def prepare_replay_get(self, date, url_idx):
+        return prepare_replay_get(date, url_idx, session=self._session)
+
     def query_key_stats(self, date_interval, urls):
         """
 
@@ -85,36 +174,24 @@ class NonCachingAsyncRequestsClient(BaseClient):
             return []
         logger = logging.getLogger('query_key_stats')
         dates = pd.date_range(*date_interval)
-        idx = self._cdx_list(urls)
-        #logger.debug('IDX: {}'.format({k: v.tolist() for k, v in idx.iteritems()}))
-        prepared_requests = OrderedDict()
-        for date in dates:
-            for url in urls:
-                #prepared_get = prepare_replay_get(date, base_replay_url, url)
-                try:
-                    prepared_get = prepare_replay_get(date, idx[url], session=self._session)
-                except KeyError:
-                    logger.warning('Could not find replay of {url} for {date}'.format(**locals()))
-                else:
-                    logger.debug('(date={}, url={}) -> {}'.format(date, url, prepared_get.url))
-                    prepared_requests[(date, url)] = prepared_get
-        logger.debug('Mapping requests')
-        responses = grequests.map(prepared_requests.values(), size=self.grequests_pool_size)
-        logger.debug('Mapping requests done')
-        logger.debug('Parsing responses')
-        key_stats = parse_overview_key_stats_from_responses(responses)
-        logger.debug('Parsing responses done')
-        # Unwrap scrapy data types
-        key_stats = map(dict, key_stats)
-        for key_stat, (date, url) in zip(key_stats, prepared_requests):
-            key_stat['instrument_url'] = url
-        # Filter invalid
-        key_stats = [key_stat for key_stat in key_stats if len(key_stat) > 1]
-        # Day accuracy is enough
-        for key_stat in key_stats:
-            key_stat['value_date'] = pd.Timestamp(key_stat['value_date'].date(), tz=pytz.UTC)
+
+        all_key_stats = []
+        for url in urls:
+            key_stats = DelegatingKeyStatsResolver(url, self._cdx_list, self.prepare_replay_get, self.grequests_pool_size).parse(dates)
+            # Unwrap scrapy data types
+            key_stats = map(dict, key_stats)
+            for ks in key_stats:
+                ks['instrument_url'] = url
+
+            # Filter invalid
+            key_stats = [key_stat for key_stat in key_stats if len(key_stat) > 1]
+
+            # Day accuracy is enough
+            for key_stat in key_stats:
+                key_stat['value_date'] = pd.Timestamp(key_stat['value_date'].date(), tz=pytz.UTC)
+            all_key_stats.extend(key_stats)
 
         sort_key_fun = lambda item: (item['value_date'], urls.index(item['instrument_url']))
-        key_stats = list(iter_sort_uniq(key_stats, sort_key_fun))
+        all_key_stats = list(iter_sort_uniq(all_key_stats, sort_key_fun))
 
-        return key_stats
+        return all_key_stats

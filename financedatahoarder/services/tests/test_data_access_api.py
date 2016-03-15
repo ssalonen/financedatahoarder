@@ -7,7 +7,7 @@ from financedatahoarder.services.data_access_api import NonCachingAsyncRequestsC
 from nose.tools import eq_
 from nose_parameterized import parameterized
 from datetime import datetime, date, timedelta
-from mock import patch
+from mock import call, patch
 import pandas as pd
 import logging
 
@@ -66,18 +66,26 @@ def test_query_key_stats_correct_http_requests(date_interval, urls, base_replay_
 
         _ = client.query_key_stats(date_interval, urls)
 
-        cdx_list.assert_called_once_with(urls)
+        cdx_list.assert_has_calls([call([url]) for url in urls])
 
-        eq_(len(grequests_map.call_args_list), 1)
-        actual_args, actual_kwargs = grequests_map.call_args_list[0]
-        eq_(actual_kwargs, {'size': grequests_pool_size})
-        eq_(len(actual_args), 1)
+        eq_(len(grequests_map.call_args_list), len(urls))
 
-        actual_requests = actual_args[0]
-        eq_(len(actual_requests), len(expected_requests))
-        for expected_request, actual_request in zip(expected_requests, actual_requests):
-            _assert_equal_url_method_params_same(actual_request,
-                                                 expected_request)
+        for map_args, _ in grequests_map.call_args_list:
+            eq_(len(map_args), 1)
+
+        # number of requests should match the expected
+        eq_(sum(len(map_args[0]) for map_args, _ in grequests_map.call_args_list),
+            len(expected_requests))
+        # Verify the actual requests
+        for actual_requests_for_url, actual_kwargs in grequests_map.call_args_list:
+            # Unpack argument-tuple
+            actual_requests_for_url, = actual_requests_for_url
+            eq_(actual_kwargs, {'size': grequests_pool_size})
+
+            expected_requests_by_url = {r.url: r for r in expected_requests}
+            for actual_request in actual_requests_for_url:
+                expected_request = expected_requests_by_url[actual_request.url]
+                _assert_equal_url_method_params_same(expected_request, actual_request)
 
 
 def _dummy_url_from_id(id):
@@ -235,7 +243,17 @@ def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_
         logger.debug(urls)
         num_requests = len(response_filenames)
         num_funds = len(urls)
-        grequests_map.return_value = map(partial(DummyResponse, status_code=200), responses)
+
+        # Mock responses by the url
+        grequest_map_return_values = []
+        for url in urls:
+            instrument_id = url.rsplit('.', 1)[0].rsplit('.', 1)[1]
+            grequest_map_return_values.append([resp for resp, response_filename in zip(responses, response_filenames)
+                                               if instrument_id in response_filename])
+
+
+        grequests_map.side_effect = [map(partial(DummyResponse, status_code=200), ret)
+                                     for ret in grequest_map_return_values]
         # We should have num_requests should be evenly divisible by num_funds
         assert num_requests / float(num_funds) == int(num_requests / num_funds)
         num_times = int(num_requests / num_funds)
@@ -245,7 +263,8 @@ def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_
         # Basic assertion that input test data is correct
         actual_args, actual_kwargs = grequests_map.call_args_list[0]
         eq_(actual_kwargs, {'size': 4})
-        eq_(len(actual_args[0]), len(response_filenames))
+        eq_(sum(len(map_args[0]) for map_args, _ in grequests_map.call_args_list),
+            len(response_filenames))
 
         eq_(expected_key_stats, actual)
         print actual
