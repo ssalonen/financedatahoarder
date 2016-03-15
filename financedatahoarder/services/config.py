@@ -1,4 +1,8 @@
 DEBUG = False
 BASE_REPLAY_URL = "http://host.com/to/archive.org/replay"
 GREQUESTS_POOL_SIZE = 64
-CACHE_EXPIRE_AFTER = 3600 * 24 * 60
+CACHE_EXPIRE_AFTER = 3600 * 24 * 90
+REDIS_CACHING_ENABLED = False
+REDIS_HOST = None
+REDIS_PORT = None
+REDIS_DB = None

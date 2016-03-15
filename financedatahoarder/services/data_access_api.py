@@ -8,10 +8,12 @@ from financedatahoarder.services.http_utils import prepare_replay_get, prepare_c
 from financedatahoarder.services.parse_utils import parse_overview_key_stats_from_responses, parse_idx_list
 from financedatahoarder.services.utils import iter_sort_uniq
 from financedatahoarder.scraper.scrapers.parsers.morningstar_overview import OverviewKeyStats
+from toolz import groupby
 import pandas as pd
 import pytz
 import logging
-
+from itertools import chain
+from redis_cache.rediscache import cache_it
 
 class BaseClient(object):
 
@@ -21,35 +23,63 @@ class BaseClient(object):
 
 class PyWbIndexBasedKeyStatsResolver(object):
 
-    def __init__(self, url, cdx_list_func, prepare_replay_get_func, grequests_pool_size):
+    def __init__(self, url, cdx_list_func, prepare_replay_get_func, grequests_pool_size,
+                 redis_cache):
         self.url = url
         self._cdx_list = cdx_list_func
         self._prepare_replay_get = prepare_replay_get_func
         self._grequests_pool_size = grequests_pool_size
+        self._redis_cache = redis_cache
+        self._logger = logging.getLogger('PyWbIndexBasedParser')
+
+    def _from_cache(self, url, params, req):
+        assert req.url == url
+        assert req.kwargs['params'] == params
+        # Hack to cache using url and params, but use req in query
+
+        def _inner(req=req):
+            @cache_it(cache=self._redis_cache)
+            def query_from_cache(url, params):
+                return self._process_noncached([req])[0]
+            return query_from_cache
+        return _inner()(url, params)
+
+    def _process_noncached(self, reqs):
+        self._logger.debug('Mapping requests')
+        responses = grequests.map(reqs, size=self._grequests_pool_size)
+        self._logger.debug('Mapping requests done')
+
+        self._logger.debug('Parsing responses')
+        key_stats = parse_overview_key_stats_from_responses(responses)
+        self._logger.debug('Parsing responses done')
+        return key_stats
+
+    def _process_cached(self, reqs):
+        key_stats = [self._from_cache(req.url, req.kwargs['params'], req) for req in reqs]
+        return key_stats
 
     def parse(self, dates):
         url = self.url
         idx = self._cdx_list([url])
-        logger = logging.getLogger('PyWbIndexBasedParser')
+
         prepared_requests = OrderedDict()
         for date in dates:
-            #prepared_get = prepare_replay_get(date, base_replay_url, url)
             try:
                 prepared_get = self._prepare_replay_get(date, idx[url])
             except KeyError:
-                logger.warning('Could not find replay of {url} for {date}'.format(**locals()))
+                self._logger.warning('Could not find replay of {url} for {date}'.format(**locals()))
             else:
-                logger.debug('(date={}, url={}) -> {}'.format(date, url, prepared_get.url))
+                self._logger.debug('(date={}, url={}) -> {}'.format(date, url, prepared_get.url))
 
                 prepared_requests[(date, url)] = prepared_get
 
-        logger.debug('Mapping requests')
-        responses = grequests.map(prepared_requests.values(), size=self._grequests_pool_size)
-        logger.debug('Mapping requests done')
+        # cacheable_to_items = groupby(lambda req: False if self._redis_cache.connection is None else (req.url, req.kwargs['params']) in self._redis_cache,
+        #         prepared_requests.itervalues())
 
-        logger.debug('Parsing responses')
-        key_stats = parse_overview_key_stats_from_responses(responses)
-        logger.debug('Parsing responses done')
+        # key_stats = list(chain.from_iterable({False: self._process_cached, True: self._process_cached}[cache](items)
+        #            for cache, items in cacheable_to_items.iteritems()))
+        key_stats = self._process_cached(prepared_requests.values())
+
         return key_stats
 
 
@@ -70,6 +100,12 @@ class SeligsonCSVKeyStatsResolver(object):
         return url in cls.url_to_seligson_csv_url
 
     def __init__(self, url):
+        """
+
+        :param url:
+        :return:
+        :throw KeyError: on unsupported urls
+        """
         self.url = self.url_to_seligson_csv_url[url]
         logger = logging.getLogger('SeligsonCSVKeyStatsResolver')
         logger.debug('Resolved {} to {}'.format(url, self.url))
@@ -100,19 +136,30 @@ class SeligsonCSVKeyStatsResolver(object):
 
 class DelegatingKeyStatsResolver(object):
 
-    def __init__(self, url, cdx_list_func, prepare_replay_get_func, grequests_pool_size):
+    def __init__(self, cdx_list_func, prepare_replay_get_func, grequests_pool_size, redis_cache):
+        self.cdx_list_func = cdx_list_func
+        self.prepare_replay_get_func = prepare_replay_get_func
+        self.grequests_pool_size = grequests_pool_size
+        self.redis_cache = redis_cache
+
+    def parse(self, url, dates):
         try:
             self.parser = SeligsonCSVKeyStatsResolver(url)
         except KeyError:
-            self.parser = PyWbIndexBasedKeyStatsResolver(url, cdx_list_func, prepare_replay_get_func, grequests_pool_size)
+            self.parser = PyWbIndexBasedKeyStatsResolver(url, self.cdx_list_func, self.prepare_replay_get_func,
+                                                         self.grequests_pool_size, self.redis_cache)
 
-    def parse(self, dates):
         return self.parser.parse(dates)
+
+
+
+class DummyCache(object):
+    connection = None
 
 
 class NonCachingAsyncRequestsClient(BaseClient):
 
-    def __init__(self, base_replay_url, grequests_pool_size, expire_after=0, expire_list_after=300):
+    def __init__(self, base_replay_url, grequests_pool_size, redis_cache=None, expire_after=0, expire_list_after=300):
         """
         :param base_replay_url: Base replay url to query
         :type base_replay_url: str
@@ -123,6 +170,7 @@ class NonCachingAsyncRequestsClient(BaseClient):
         :param expire_list_after: CDX list cache expiration in seconds. None or zero to disable
         :type expire_list_after: int | None
         """
+        redis_cache = DummyCache if redis_cache is None else redis_cache
         self.base_replay_url = base_replay_url
         self.grequests_pool_size = grequests_pool_size
         # We need to increase requests pool size since grequests makes many requests concurrently
@@ -138,6 +186,7 @@ class NonCachingAsyncRequestsClient(BaseClient):
         list_cache_adapter = CacheControlAdapter(cache=FileCache('.list_http_cache'),
                                                  heuristic=ExpiresAfter(seconds=expire_list_after))
         self._list_session.mount('http://', list_cache_adapter)
+        self.redis_cache = redis_cache
 
     def _cdx_list(self, urls):
         """Return dict representing successful pywb recordings.
@@ -183,7 +232,9 @@ class NonCachingAsyncRequestsClient(BaseClient):
 
         all_key_stats = []
         for url in urls:
-            key_stats = DelegatingKeyStatsResolver(url, self._cdx_list, self.prepare_replay_get, self.grequests_pool_size).parse(dates)
+            key_stats = DelegatingKeyStatsResolver(self._cdx_list,
+                                                   self.prepare_replay_get, self.grequests_pool_size,
+                                                   self.redis_cache).parse(url, dates)
             # Unwrap scrapy data types
             key_stats = map(dict, key_stats)
             for ks in key_stats:

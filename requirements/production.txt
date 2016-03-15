@@ -10,3 +10,5 @@ nose-parameterized
 mock
 lockfile
 cachecontrol
+redis-simple-cache
+toolz

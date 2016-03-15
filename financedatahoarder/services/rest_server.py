@@ -4,6 +4,8 @@ import logging
 import logging.config
 
 # Configure logging with uwsgi
+from redis_cache.rediscache import SimpleCache
+
 logging_cfg_path = os.environ.get('LOGGING_INI', None)
 if logging_cfg_path:
     logging.config.fileConfig(logging_cfg_path)
@@ -47,13 +49,26 @@ from flask_restful import inputs
 from financedatahoarder.services.utils import dataframe_from_list_of_dicts
 
 
-
+class DummyCache(object):
+    connection = None
 
 app = Flask(__name__)
 # Load the configuration from the instance folder
+# and then override settings from file pointed by APP_CONFIG_FILE environment variable
 app.config.from_pyfile('config.py')
-# app.config.from_envvar('APP_CONFIG_FILE)
+app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
+logging.getLogger(__name__).info('Config: {}'.format(app.config))
+
+if app.config['REDIS_CACHING_ENABLED']:
+    logging.getLogger(__name__).info('Using redis cache {}:{}'.format(app.config['REDIS_HOST'],
+                                                                      app.config['REDIS_PORT']))
+    redis_cache = SimpleCache(expire=app.config['CACHE_EXPIRE_AFTER'],
+                              host=app.config['REDIS_HOST'] , port=app.config['REDIS_PORT'],
+                                  db=app.config['REDIS_DB'])
+else:
+    logging.getLogger(__name__).info('Not using redis cache')
+    redis_cache = DummyCache
 
 class ErrorHandlingApi(Api):
     def handle_error(self, e):
@@ -64,8 +79,8 @@ class ErrorHandlingApi(Api):
 #api = ManyFormatApi(app)
 api = ErrorHandlingApi(app)
 
-client = NonCachingAsyncRequestsClient(app.config['BASE_REPLAY_URL'], app.config['GREQUESTS_POOL_SIZE'],
-                                       expire_after=app.config['CACHE_EXPIRE_AFTER'])
+client = NonCachingAsyncRequestsClient(app.config['BASE_REPLAY_URL'], app.config['GREQUESTS_POOL_SIZE'], redis_cache,
+                                       expire_after=app.config['CACHE_EXPIRE_AFTER'], expire_list_after=0)
 
 
 @api.representation('application/json')
