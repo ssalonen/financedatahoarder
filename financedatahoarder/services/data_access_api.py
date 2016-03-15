@@ -75,7 +75,6 @@ class SeligsonCSVKeyStatsResolver(object):
         logger.debug('Resolved {} to {}'.format(url, self.url))
 
     def parse(self, dates):
-        assert dates.tz is None  # naive dates
         logger = logging.getLogger('SeligsonCSVKeyStatsResolver')
         # FIXME: error handling
         logger.debug('Querying {}'.format(self.url))
@@ -87,7 +86,10 @@ class SeligsonCSVKeyStatsResolver(object):
         except KeyError:
             return []
         else:
-            assert data.index.tz is None  # naive dates
+            try:
+                data.index = data.index.tz_localize(dates.tz)
+            except TypeError: pass
+
             return [{} if pd.isnull(value) else OverviewKeyStats(value=value, value_date=value_date)
                 for value_date, value in data.iteritems()]
 
