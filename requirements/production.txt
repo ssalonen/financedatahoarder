@@ -4,6 +4,7 @@ numpy
 pandas
 flask
 flask-restplus
+flask-restful
 nose
 nose-parameterized
 mock
