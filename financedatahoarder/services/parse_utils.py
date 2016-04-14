@@ -26,7 +26,7 @@ def parse_overview_key_stats_from_responses(responses):
         if response.status_code == requests.codes.ok:
             try:
                 key_stats, = parse_overview_key_stats(Selector(text=response.content))
-            except IndexError:
+            except:
                 logger().warning('Parse failed for {} -- ignoring entry'.format(response.url),
                                  exc_info=True)
                 key_stats = {}
