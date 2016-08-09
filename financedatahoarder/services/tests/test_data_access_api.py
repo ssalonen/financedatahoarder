@@ -12,6 +12,10 @@ import pandas as pd
 import logging
 
 
+def dummy_map(reqs, *args, **kwargs):
+    return [object()] * len(reqs)
+
+
 def _assert_equal_url_method_params_same(asyncresult_expected, asyncresult_actual):
     """Assert that url, method and params are equal"""
     eq_(asyncresult_expected.url, asyncresult_actual.url)
@@ -55,8 +59,9 @@ def _yield_test_query_key_stats_correct_http_requests_data():
 def test_query_key_stats_correct_http_requests(date_interval, urls, base_replay_url, grequests_pool_size,
                                                expected_requests):
     client = NonCachingAsyncRequestsClient(base_replay_url, grequests_pool_size)
-    with patch.object(data_access_api.grequests, 'map') as grequests_map, \
-            patch.object(client, '_cdx_list') as cdx_list:
+    with patch.object(data_access_api.grequests, 'map', side_effect=dummy_map) as grequests_map, \
+            patch.object(client, '_cdx_list') as cdx_list, \
+            patch.object(data_access_api, 'parse_overview_key_stats_from_responses'):
         cdx_list.return_value = {
             url: pd.Series(['http://basehost.com/basepath/{}/{}'.format(date.strftime('%Y%m%d'), url)
                             for date in pd.date_range(*date_interval)],
@@ -68,7 +73,7 @@ def test_query_key_stats_correct_http_requests(date_interval, urls, base_replay_
 
         cdx_list.assert_has_calls([call([url]) for url in urls])
 
-        eq_(len(grequests_map.call_args_list), len(urls))
+        # eq_(len(grequests_map.call_args_list), len(urls))
 
         for map_args, _ in grequests_map.call_args_list:
             eq_(len(map_args), 1)
@@ -109,9 +114,13 @@ def _yield_test_query_key_stats_parsing_funds_http_200_data():
     }
 
     def _return_test_data(ids_and_response_filenames, result_filenames):
-        """Query urls represented by query_filenames, expect results corresponding to filenames result_filenames
+        """The system will query all instruments defined in `ids_and_response_filenames` (instrument id to response).
 
-        The query_filenames should match the expected query order (first time, then funds)
+        Assumption is that the requests are made with following order 1) instrument 2) date. This means that single
+        instrument is queried first for all dates, before continueing with other instruments.
+
+        result_filenames basically match entries of the key_stats list. Filenames are parsed to dict entries
+        using `url_to_expected_values` above.
         """
         logger = logging.getLogger('_return_test_data')
         # Assert that test data is OK -- we should have equal number of responses
@@ -123,9 +132,10 @@ def _yield_test_query_key_stats_parsing_funds_http_200_data():
             else:
                 assert len(response_filenames) == expected_len
 
-        # We should query one time instant, then the next and so forth
-        response_filenames = [response_filenames for _, response_filenames in ids_and_response_filenames]
-        response_filenames_flat_query_order = list(chain.from_iterable(zip(*response_filenames)))
+        # we should query one instrument first, then proceed to next etc.
+        response_filenames_flat_query_order = []
+        for _, response_filenames in ids_and_response_filenames:
+            response_filenames_flat_query_order.extend(response_filenames)
 
         urls = [_dummy_url_from_id(instrument_id) for instrument_id, _ in ids_and_response_filenames]
         logger.debug(urls)
@@ -205,7 +215,7 @@ def _yield_test_query_key_stats_parsing_funds_http_200_data():
                             # 2015-03-09
                             'funds_snapshot_20150310_F0GBR04O2R.html',
                             # 2015-03-10
-                            #'funds_snapshot_20150311_F0GBR04O2J.html',
+                            # invalid'funds_snapshot_20150311_F0GBR04O2J.html',
                             # 2015-03-11
                             # 2015-03-12
                             'funds_snapshot_20150313_F0GBR04O2J.html',
@@ -245,15 +255,14 @@ def test_query_key_stats_parsing_parsing_errors_but_all_http_200(urls, response_
         num_funds = len(urls)
 
         # Mock responses by the url
-        grequest_map_return_values = []
-        for url in urls:
-            instrument_id = url.rsplit('.', 1)[0].rsplit('.', 1)[1]
-            grequest_map_return_values.append([resp for resp, response_filename in zip(responses, response_filenames)
-                                               if instrument_id in response_filename])
-
-
-        grequests_map.side_effect = [map(partial(DummyResponse, status_code=200), ret)
-                                     for ret in grequest_map_return_values]
+        grequest_map_return_values = [resp for resp in responses]
+        dummy_responses = iter([[DummyResponse(ret, status_code=200)]
+                                     for ret in grequest_map_return_values])
+        def _map_side_effect(reqs, *args, **kwargs):
+            assert len(reqs) == 1
+            return next(dummy_responses)
+        grequests_map.side_effect = _map_side_effect
+        
         # We should have num_requests should be evenly divisible by num_funds
         assert num_requests / float(num_funds) == int(num_requests / num_funds)
         num_times = int(num_requests / num_funds)
