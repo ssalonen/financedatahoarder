@@ -40,18 +40,14 @@ class PyWbIndexBasedKeyStatsResolver(object):
         def _inner(req=req):
             @cache_it(cache=self._redis_cache)
             def query_from_cache(url, params):
+                self._logger.debug("Will process %s", url)
                 return self._process_noncached([req])[0]
             return query_from_cache
         return _inner()(url, params)
 
     def _process_noncached(self, reqs):
-        self._logger.debug('Mapping requests')
         responses = grequests.map(reqs, size=self._grequests_pool_size)
-        self._logger.debug('Mapping requests done')
-
-        self._logger.debug('Parsing responses')
         key_stats = parse_overview_key_stats_from_responses(responses)
-        self._logger.debug('Parsing responses done')
         return key_stats
 
     def _process_cached(self, reqs):
@@ -73,11 +69,6 @@ class PyWbIndexBasedKeyStatsResolver(object):
 
                 prepared_requests[(date, url)] = prepared_get
 
-        # cacheable_to_items = groupby(lambda req: False if self._redis_cache.connection is None else (req.url, req.kwargs['params']) in self._redis_cache,
-        #         prepared_requests.itervalues())
-
-        # key_stats = list(chain.from_iterable({False: self._process_cached, True: self._process_cached}[cache](items)
-        #            for cache, items in cacheable_to_items.iteritems()))
         key_stats = self._process_cached(prepared_requests.values())
 
         return key_stats
